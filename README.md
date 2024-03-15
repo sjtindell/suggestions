@@ -28,6 +28,14 @@ curl -v "http://35.86.250.20/suggestions?q=London"
 
 Tested using Python 3.10.6
 
+Set the ENV variable for the data path
+
+```
+export DATA_FILEPATH="data/cities_canada-usa.tsv"
+```
+
+Then setup the venv
+
 ```
 python --version
 python -m venv venv
@@ -35,7 +43,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-then start the webserver for debug
+and start the webserver for debug
 
 ```
 python run.py
@@ -48,7 +56,7 @@ gunicorn -w 4 -b 127.0.0.1:5000 app:app
 ```
 
 ### Run the tests
-In another terminal
+In another terminal, after starting the webserver
 
 ```
 source venv/bin/activate

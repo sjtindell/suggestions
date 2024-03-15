@@ -23,7 +23,7 @@ def load_data():
 def calculate_scores(df, query, latitude=None, longitude=None, score_threshold=75):
     choices = df['all_names'].tolist()
     matches = process.extract(query, choices, limit=100, scorer=fuzz.token_sort_ratio)
-    matches = [match for match in matches if match[1] >= score_threshold] # tune threshold to get more/less
+    matches = [match for match in matches if match[1] >= score_threshold] # tune threshold to get more/less matches
 
     if not matches: # return empty
         return pd.DataFrame(columns=['name', 'admin1', 'country', 'lat', 'long', 'score'])
