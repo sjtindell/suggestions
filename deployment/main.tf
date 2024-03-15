@@ -12,6 +12,11 @@ provider "aws" {
   region = "us-west-2" # or your preferred region
 }
 
+variable "github_repo_name" {
+  description = "GitHub repository name in the format 'username/repo'."
+  type        = string
+}
+
 resource "aws_lightsail_key_pair" "buzz_key" {
   name       = "buzz-key"
   public_key = file("~/.ssh/id_rsa_aws.pub")
@@ -45,7 +50,7 @@ resource "aws_lightsail_instance" "suggestions_app" {
 
     # Clone your repository
     cd /home/ec2-user
-    git clone git@github.com:sjtindell/suggestions.git suggestions
+    git clone git@github.com:${var.github_repo_name}.git suggestions
 
     cd suggestions
     docker build -t suggestions .

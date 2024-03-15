@@ -49,4 +49,4 @@ def suggestions():
         ]
     }
 
-    return jsonify(response)
+    return jsonify(response) # sets application/json header

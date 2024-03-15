@@ -69,14 +69,23 @@ python -m unittest discover tests
 docker build -t suggestions .
 ```
 
+and run to test against
+
+```
+docker run -p 8080:5000 -e DATA_FILEPATH=/app/data/cities_canada-usa.tsv suggestions
+curl "http://127.0.0.1:8080/suggestions?q=London&latitude=43.70011&longitude=-79.4163"
+```
+
 ## Deployment
-To deploy to AWS Lightsail, configure your aws config and credentials files for your aws account. Then
+To deploy to AWS Lightsail, configure your aws config and credentials files for your aws account.
+
+Then execute terraform, passing the github repo
 
 ```
 cd deployment
 terraform init
 terraform plan
-terraform apply
+terraform apply -var "github_repo_name=sjtindell/suggestions"
 ```
 
 Your instance is now reachable at its public IP. For example we are running a test instance at
