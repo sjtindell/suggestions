@@ -27,8 +27,8 @@ resource "aws_lightsail_instance" "suggestions_app" {
   user_data = <<-EOF
     #!/bin/bash
     sudo yum -y update
-    sudo yum -y install python3 python3-pip jq git
-    sudo yum install -y docker
+    sudo yum -y install python3 python3-pip
+    sudo yum install -y jq git docker
 
     sudo systemctl start docker
     sudo systemctl enable docker
@@ -49,7 +49,7 @@ resource "aws_lightsail_instance" "suggestions_app" {
 
     cd suggestions
     docker build -t suggestions .
-    docker run -d -p 80:80 -e DATA_FILEPATH=/app/data/cities_canada-usa.tsv suggestions
+    docker run -d -p 80:5000 -e DATA_FILEPATH=/app/data/cities_canada-usa.tsv suggestions
 
     EOF
 }
